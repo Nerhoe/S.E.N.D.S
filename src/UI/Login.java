@@ -103,6 +103,7 @@ public class Login extends javax.swing.JFrame {
         if (getPass.equals("1") && getUser.equals("1")){
             TableView table = new TableView();
             table.setVisible(true);
+            this.dispose();
         }
     }//GEN-LAST:event_loginBtnActionPerformed
 
