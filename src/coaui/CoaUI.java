@@ -5,11 +5,14 @@
 package coaui;
 import UI.TableView;
 import UI.Login;
+import Databases.sqlConnetor;
 import javax.swing.JFrame;
+
 public class CoaUI {
-    
+    SQLConnector db = new SQLConnector();
     public static void main(String[] args) {
         runUI();
+        db.createDb();
     }
     static void runUI(){
         Login login = new Login();
