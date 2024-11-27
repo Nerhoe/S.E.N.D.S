@@ -58,7 +58,7 @@ public class Login extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(204, 0, 0));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI Emoji", 0, 48)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI Black", 0, 48)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("S.E.N.D.S");
 
