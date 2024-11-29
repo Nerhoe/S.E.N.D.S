@@ -1,0 +1,19 @@
+buildscript {
+    repositories {
+        google()        // Required for Firebase and other Google services
+        mavenCentral()  // For additional dependencies
+    }
+    dependencies {
+        // Add this line inside the 'dependencies' block
+        classpath 'com.google.gms:google-services:4.3.15'  // Correct placement
+    }
+}
+
+allprojects {
+    repositories {
+        google()        // Ensure this is added
+        mavenCentral()
+    }
+}
+
+apply plugin: 'com.google.gms.google-services'  // Firebase plugin for Android
