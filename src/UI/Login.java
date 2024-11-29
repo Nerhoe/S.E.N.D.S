@@ -1,5 +1,4 @@
 package UI;
-import UI.TableView;
 public class Login extends javax.swing.JFrame {
 
     /**
@@ -195,7 +194,7 @@ public class Login extends javax.swing.JFrame {
         String getUser = userName.getText();
         String getPass = passWord.getText();
         if (getPass.equals("1") && getUser.equals("1")){
-            TableView table = new TableView();
+            Home table = new Home();
             table.setVisible(true);
             this.dispose();
         }

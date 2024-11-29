@@ -3,10 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package coaui;
-import UI.TableView;
 import UI.Login;
 import Databases.databases;
-import javax.swing.JFrame;
 
 public class CoaUI {
     
