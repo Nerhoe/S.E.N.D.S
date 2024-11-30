@@ -197,7 +197,7 @@ public class AddPeople extends javax.swing.JFrame {
         String getAddress = address.getText();
         String getContact = conNum.getText();
         databases db = new databases();
-        db.insertPeople(getLast, getFirst, getAddress, getContact, "");
+        db.insertPeople(getLast, getFirst, getAddress, getContact, "1");
     }//GEN-LAST:event_submitBtnActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

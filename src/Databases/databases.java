@@ -35,7 +35,7 @@ public class databases {
             statement2.execute(makeTableRequests);
             statement2.execute(makeTableRecent);
         }finally{
-            conn.close();
+            
         }
         
     }
@@ -49,7 +49,7 @@ public class databases {
     
     public void insertPeople(String lastName, String firstName, String address, String contact, String img){
         try{
-        String addPeople = "insert into people (last_name, first_name, address, contact_number, image_ID) values (?, ?, ?, ?, ?)";    
+        String addPeople = "insert into people (last_name, first_name, address, contact_number, imageID) values (?, ?, ?, ?, ?)";    
         String url = "jdbc:mysql://localhost:3306/SENDS";
         String username = "root"; // Replace with your database username
         String password = ""; // Replace with your database password
@@ -61,8 +61,12 @@ public class databases {
         preparedStatement.setString(3, address);
         preparedStatement.setString(4, contact);
         preparedStatement.setString(5, img);
+        preparedStatement.execute();
+            System.out.println("test");
         }catch (SQLException e){
             System.out.println(e.getMessage());
+        }finally{
+            
         }
     }
 }

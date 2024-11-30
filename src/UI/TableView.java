@@ -4,13 +4,25 @@
  */
 package UI;
 import UI.AddPeople;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+import java.sql.ResultSetMetaData;
+import java.sql.ResultSet;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+
 public class TableView extends javax.swing.JFrame {
+
 
     /**
      * Creates new form TableView
      */
     public TableView() {
         initComponents();
+        this.tableView();
     }
 
     /**
@@ -23,11 +35,11 @@ public class TableView extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        peopleTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        peopleTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -38,7 +50,7 @@ public class TableView extends javax.swing.JFrame {
                 "ID", "LASTNAME", "FIRSTNAME", "ADDRESS", "CONTACT", "IMAGEIDNAME"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(peopleTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -57,6 +69,47 @@ public class TableView extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    void tableView(){
+        String url = "jdbc:mysql://localhost:3306/SENDS";
+        String username = "root"; // Replace with your database username
+        String password = ""; // Replace with your database password
+        String query = "SELECT last_name, first_name, address, contact_number, imageID FROM people";
+        DefaultTableModel tableModel = new DefaultTableModel();
+        
+        
+    try ( 
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query)) {
+             
+            // Get metadata to dynamically get column names
+            ResultSetMetaData metaData = rs.getMetaData();
+            int columnCount = metaData.getColumnCount();
+            
+            // Add column names to the table model
+            for (int i = 1; i <= columnCount; i++) {
+                tableModel.addColumn(metaData.getColumnName(i));
+                System.out.println("ran test "+ i);
+            }
+            
+            // Add rows to the table model
+            while (rs.next()) {
+                Object[] row = new Object[columnCount];
+                for (int i = 1; i <= columnCount; i++) {
+                    row[i - 1] = rs.getObject(i);
+                }
+                tableModel.addRow(row);
+            }
+            
+            // Set the model to the JTable
+            peopleTable.setModel(tableModel);
+            
+        }catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Database connection failed: " + e.getMessage());
+        }
+    }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -91,6 +144,6 @@ public class TableView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable peopleTable;
     // End of variables declaration//GEN-END:variables
 }
