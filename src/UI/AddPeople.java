@@ -3,11 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package UI;
-
-/**
- *
- * @author Aaron
- //asdf*/
+import Databases.databases;
 public class AddPeople extends javax.swing.JFrame {
 
     /**
@@ -200,7 +196,8 @@ public class AddPeople extends javax.swing.JFrame {
         String getFirst = firstName.getText();
         String getAddress = address.getText();
         String getContact = conNum.getText();
-        
+        databases db = new databases();
+        db.insertPeople(getLast, getFirst, getAddress, getContact, "");
     }//GEN-LAST:event_submitBtnActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

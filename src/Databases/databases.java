@@ -3,6 +3,7 @@ import java.sql.DriverManager;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.PreparedStatement;
 public class databases {
     
     public static void createDb() throws SQLException{
@@ -43,6 +44,25 @@ public class databases {
             createDb();
         }catch (SQLException ex){
             System.out.println(ex.getMessage());
+        }
+    }
+    
+    public void insertPeople(String lastName, String firstName, String address, String contact, String img){
+        try{
+        String addPeople = "insert into people (last_name, first_name, address, contact_number, image_ID) values (?, ?, ?, ?, ?)";    
+        String url = "jdbc:mysql://localhost:3306/SENDS";
+        String username = "root"; // Replace with your database username
+        String password = ""; // Replace with your database password
+        Connection conn = null;
+        conn = DriverManager.getConnection(url, username, password);
+        PreparedStatement preparedStatement = conn.prepareStatement(addPeople);
+        preparedStatement.setString(1, lastName);
+        preparedStatement.setString(2, firstName);
+        preparedStatement.setString(3, address);
+        preparedStatement.setString(4, contact);
+        preparedStatement.setString(5, img);
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
         }
     }
 }
